@@ -69,10 +69,11 @@ error: function (richiesta, stato, errore) {
 });
 
 
-var numMese = 0;
+
 $(document).on('click', '.succ', function() {
-  numMese ++;
-  $('h1').text(getMese(numMese));
+  mese = get2018.add(1, 'month').format(`MMMM`);
+  console.log(mese);
+  $('h1').text(mese);
 });
 
 $(document).on('click', '.prec', function() {
@@ -83,9 +84,7 @@ $(document).on('click', '.prec', function() {
 
 
 
-function getMese(num) {
-  moment().locale('it').set({'month' : num})
-}
+
 
 
 
