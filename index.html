@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:400,700,800&display=swap" rel="stylesheet">
   <!-- jquery -->
   <script src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
@@ -16,13 +17,18 @@
   <title>Calendario Festività</title>
 </head>
 <body>
-  <h1></h1>
-  <button class="prec" type="button" name="button">Precedente</button>
-  <button class="succ" type="button" name="button">Successivo</button>
+  <header>
+    <p>2018</p>
+    <h1></h1>
+  </header>
+
+  <div class="btn-wrapper">
+    <button class="prec buttonz pr" type="button" name="button">👈 Mese Precedente</button>
+    <button class="succ buttonz su" type="button" name="button">Mese Successivo 👉</button>
+  </div>
 
   <ul class="mese">
   </ul>
-
 
   <script id="entry-template" type="text/x-handlebars-template">
     <li data-day="{{day}}">{{giorno}}</li>
