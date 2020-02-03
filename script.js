@@ -4,6 +4,12 @@ $(document).ready(function () {
   var template = Handlebars.compile(source);
 
 
+
+
+
+
+
+
 // Imposta la data al 1 gennaio 2018
 var get2018 = moment().locale('it').set({'year' : 2018, 'month' : 0, 'date' : 1});
 
@@ -16,7 +22,6 @@ var giorno = get2018.format(`DD dddd`);
 var mese = get2018.format(`MMMM`);
 $('h1').text(mese);
 
-console.log(mese);
 
 // Prende il primo giorno dell'anno e lo trasforma nel formato da mettere nel data-day
 var dataDay = get2018.format(`YYYY-MM-DD`);
@@ -25,7 +30,7 @@ var dataDay = get2018.format(`YYYY-MM-DD`);
 for (var i = 0; i < daysIn; i++) {
     var context = {'giorno' : giorno, 'day' : dataDay};
     var html = template(context);
-    $('.gennaio').append(html)
+    $('.mese').append(html)
     giorno = get2018.add(1, 'days').format(`DD dddd`);
     dataDay = get2018.format(`YYYY-MM-DD`)
 }
@@ -64,13 +69,23 @@ error: function (richiesta, stato, errore) {
 });
 
 
+var numMese = 0;
+$(document).on('click', '.succ', function() {
+  numMese ++;
+  $('h1').text(getMese(numMese));
+});
+
+$(document).on('click', '.prec', function() {
+  mese = get2018.subtract(1, 'month').format(`MMMM`);
+  $('h1').text(mese);
+});
 
 
 
 
-
-
-
+function getMese(num) {
+  moment().locale('it').set({'month' : num})
+}
 
 
 
