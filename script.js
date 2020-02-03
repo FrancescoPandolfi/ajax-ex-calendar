@@ -18,26 +18,34 @@ $(document).ready(function () {
     console.log(response);
     console.log(response[0].name);
     console.log(response[0].date);
+    console.log(moment(response[0].date).locale('it').format(`DDD dddd`));
 
-    moment(response[0].date);
 
     // Gennaio
 
-    var set2018 = moment().locale('it').set({'year' : 2018, 'month' : 0, 'date' : 1});
-    console.log(set2018);
+    // Imposta la data al 1 gennaio 2018
+    var get2018 = moment().locale('it').set({'year' : 2018, 'month' : 0, 'date' : 1});
 
-    var daysInGen = set2018.daysInMonth(0);
-    console.log(daysInGen);
+    // prende il numero dei giorni presenti in questo mese
+    var daysIn = get2018.daysInMonth(0);
 
-    var giorno = set2018.format(`DDD dddd`);
-    for (var i = 0; i < daysInGen; i++) {
-      console.log(giorno);
-        var context = { 'giorno' : giorno};
-        var html = template(context);
-        $('.gennaio').append(html)
-        giorno = set2018.add(1, 'day').format(`DDD dddd`);
+    // Prende il primo giorno dell'anno
+    var giorno1 = get2018.format(`DDD dddd`);
+    var gennaio = [giorno1];
 
+    // ciclo che genera un array di giorni
+    for (var i = 1; i < daysIn; i++) {
+        gennaio.push(get2018.add(1, 'day').format(`DDD dddd`));
     }
+    console.log(gennaio);
+
+
+    gennaio.forEach(function(item) {
+      var context = { 'giorno' : item};
+      var html = template(context);
+      $('.gennaio').append(html)
+    });
+
 
 
 
