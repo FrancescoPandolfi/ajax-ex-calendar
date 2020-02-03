@@ -13,6 +13,11 @@ var daysIn = get2018.daysInMonth(0);
 // Prende il primo giorno dell'anno e lo trasforma nel formato da stampare nell'html
 var giorno = get2018.format(`DD dddd`);
 
+var mese = get2018.format(`MMMM`);
+$('h1').text(mese);
+
+console.log(mese);
+
 // Prende il primo giorno dell'anno e lo trasforma nel formato da mettere nel data-day
 var dataDay = get2018.format(`YYYY-MM-DD`);
 
@@ -23,7 +28,6 @@ for (var i = 0; i < daysIn; i++) {
     $('.gennaio').append(html)
     giorno = get2018.add(1, 'days').format(`DD dddd`);
     dataDay = get2018.format(`YYYY-MM-DD`)
-
 }
 
 
@@ -41,10 +45,16 @@ success: function (data, stato) {
   console.log(response);
   // console.log(response[0].name);
   // console.log(response[0].date);
-  console.log(moment(response[1].date).locale('it').format(`DDD dddd`));
+  // console.log(moment(response[0].date).locale('it').format(`DDD dddd`));
 
-  $('.li').forEach(function (item) {
-    console.log(item);
+  $("li").each(function(){
+    var currentLiAttr = $(this);
+    response.forEach(function(item) {
+      if (item.date == currentLiAttr.attr('data-day')) {
+        currentLiAttr.append(' ' + item.name);
+      }
+    });
+
   });
 
 },
