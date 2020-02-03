@@ -7,11 +7,9 @@ $(document).ready(function () {
 
 
 
-
-
-
 // Imposta la data al 1 gennaio 2018
 var get2018 = moment().locale('it').set({'year' : 2018, 'month' : 0, 'date' : 1});
+var get2018month = moment().locale('it').set({'year' : 2018, 'month' : 0});
 
 // prende il numero dei giorni presenti in questo mese
 var daysIn = get2018.daysInMonth(0);
@@ -71,13 +69,12 @@ error: function (richiesta, stato, errore) {
 
 
 $(document).on('click', '.succ', function() {
-  mese = get2018.add(1, 'month').format(`MMMM`);
-  console.log(mese);
+  mese = get2018month.add(1, 'month').format(`MMMM`);
   $('h1').text(mese);
 });
 
 $(document).on('click', '.prec', function() {
-  mese = get2018.subtract(1, 'month').format(`MMMM`);
+  mese = get2018month.subtract(1, 'month').format(`MMMM`);
   $('h1').text(mese);
 });
 
