@@ -57,7 +57,8 @@ ul {
 }
 .buttonz {
   background: #252830;
-  color: white;
+  opacity: 0.5;
+  color: #545454;
   font-size: 15px;
   padding: 10px 20px;
   width: 300px;
@@ -68,6 +69,23 @@ ul {
   border: 0;
   outline: none;
 }
+.prec.buttonz {
+  color: white;
+  opacity: 1;
+  transition: 0.3s;
+}
+.prec.buttonz:hover {
+  transform: scale(1.05);
+}
+.succ.buttonz {
+  color: white;
+  opacity: 1;
+  transition: 0.3s;
+}
+.succ.buttonz:hover {
+  transform: scale(1.05);
+}
+
 .pr {
   text-align: left;
 }

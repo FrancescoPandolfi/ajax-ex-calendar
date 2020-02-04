@@ -9,10 +9,10 @@ $(document).ready(function () {
 
 
   // Imposta le date all'anno 2018
+  var get2018 = moment().locale('it').set({'year' : 2018, 'month' : 0, 'date' : 1});
   var get2018month = moment().locale('it').set({'year' : 2018, 'month' : 0, 'date' : 1});
   var ajaxMonth = 0;
 
-// Click successivo
 $(document).on('click', '.succ', function() {
   ajaxMonth ++;
   $('.pr').addClass('prec');
@@ -24,25 +24,25 @@ $(document).on('click', '.succ', function() {
   $('h1').text(mese);
   $('.mese').text('');
 
-  // Setta la data al mese corrente tramite ajaxMonth
-  var getCurrentM = moment().locale('it').set({'year' : 2018, 'month' : ajaxMonth, 'date' : 1});
-
   var daysIn = get2018month.daysInMonth();
-  var giorno = getCurrentM.format(`D dddd`);
-  var dataDay = getCurrentM.format(`YYYY-MM-DD`);
+  var giorno = get2018.format(`D dddd`);
+  var dataDay = get2018.format(`YYYY-MM-DD`);
 
   for (var i = 0; i < daysIn; i++) {
       var context = {'giorno' : giorno, 'day' : dataDay};
       var html = template(context);
       $('.mese').append(html)
-      giorno = getCurrentM.add(1, 'days').format(`D dddd`);
-      dataDay = getCurrentM.format(`YYYY-MM-DD`);
+      giorno = get2018.add(1, 'days').format(`D dddd`);
+      dataDay = get2018.format(`YYYY-MM-DD`);
   }
+
   ajaxCall(ajaxMonth);
+
+
 });
 
-// Click Precedente
 $('.prec').removeClass('prec');
+
 $(document).on('click', '.prec', function() {
   ajaxMonth --;
   if (ajaxMonth <= 0) {
@@ -54,50 +54,54 @@ $(document).on('click', '.prec', function() {
   $('h1').text(mese);
   $('.mese').text('');
 
-  // Setta la data al mese corrente tramite ajaxMonth
-  var getCurrentM = moment().locale('it').set({'year' : 2018, 'month' : ajaxMonth, 'date' : 1});
-
   var daysIn = get2018month.daysInMonth();
-  var giorno = getCurrentM.format(`D dddd`);
-  var dataDay = getCurrentM.format(`YYYY-MM-DD`);
+
+  var giorno = get2018.format(`D dddd`);
+  var dataDay = get2018.format(`YYYY-MM-DD`);
 
   for (var i = 0; i < daysIn; i++) {
       var context = {'giorno' : giorno, 'day' : dataDay};
+      // console.log(context);
       var html = template(context);
       $('.mese').append(html)
-      giorno = getCurrentM.add(1, 'd').format(`D dddd`);
-      dataDay = getCurrentM.format(`YYYY-MM-DD`);
+      giorno = get2018.add(1, 'd').format(`D dddd`);
+      dataDay = get2018.format(`YYYY-MM-DD`);
+
   }
+
   ajaxCall(ajaxMonth);
 });
 
 
 
-// Setta la data a Gennaio 2018 per generare il primo mese
-var getGen2018 = moment().locale('it').set({'year' : 2018, 'month' : 0, 'date' : 1});
+
 
 // prende il numero dei giorni presenti in questo mese
 var daysIn = get2018month.daysInMonth();
 
 // Prende il primo giorno dell'anno e lo trasforma nel formato da stampare nell'html
-var giorno = getGen2018.format(`D dddd`);
+var giorno = get2018.format(`D dddd`);
 
-var mese = getGen2018.format(`MMMM`);
+var mese = get2018.format(`MMMM`);
 $('h1').text(mese);
 
 
 // Prende il primo giorno dell'anno e lo trasforma nel formato da mettere nel data-day
-var dataDay = getGen2018.format(`YYYY-MM-DD`);
-
+var dataDay = get2018.format(`YYYY-MM-DD`);
 
 // ciclo che genera un array di giorni
+printDays(giorno, dataDay);
+
+function printDays(giorno, dataDay){
   for (var i = 0; i < daysIn; i++) {
       var context = {'giorno' : giorno, 'day' : dataDay};
       var html = template(context);
       $('.mese').append(html)
-      giorno = getGen2018.add(1, 'days').format(`D dddd`);
-      dataDay = getGen2018.format(`YYYY-MM-DD`)
+      giorno = get2018.add(1, 'days').format(`D dddd`);
+      dataDay = get2018.format(`YYYY-MM-DD`)
+
   }
+}
 
 ajaxCall(ajaxMonth);
 
