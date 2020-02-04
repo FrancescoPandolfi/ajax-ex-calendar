@@ -12,6 +12,7 @@ $(document).ready(function () {
   var get2018month = moment().locale('it').set({'year' : 2018, 'month' : 0, 'date' : 1});
   var ajaxMonth = 0;
 
+
 // Click successivo
 $(document).on('click', '.succ', function() {
   ajaxMonth ++;
@@ -27,19 +28,10 @@ $(document).on('click', '.succ', function() {
   // Setta la data al mese corrente tramite ajaxMonth
   var getCurrentM = moment().locale('it').set({'year' : 2018, 'month' : ajaxMonth, 'date' : 1});
 
-  var daysIn = get2018month.daysInMonth();
-  var giorno = getCurrentM.format(`D dddd`);
-  var dataDay = getCurrentM.format(`YYYY-MM-DD`);
-
-  for (var i = 0; i < daysIn; i++) {
-      var context = {'giorno' : giorno, 'day' : dataDay};
-      var html = template(context);
-      $('.mese').append(html)
-      giorno = getCurrentM.add(1, 'days').format(`D dddd`);
-      dataDay = getCurrentM.format(`YYYY-MM-DD`);
-  }
+  printDays(getCurrentM);
   ajaxCall(ajaxMonth);
 });
+
 
 // Click Precedente
 $('.prec').removeClass('prec');
@@ -57,6 +49,11 @@ $(document).on('click', '.prec', function() {
   // Setta la data al mese corrente tramite ajaxMonth
   var getCurrentM = moment().locale('it').set({'year' : 2018, 'month' : ajaxMonth, 'date' : 1});
 
+  printDays(getCurrentM);
+  ajaxCall(ajaxMonth);
+});
+
+function printDays(getCurrentM) {
   var daysIn = get2018month.daysInMonth();
   var giorno = getCurrentM.format(`D dddd`);
   var dataDay = getCurrentM.format(`YYYY-MM-DD`);
@@ -68,8 +65,9 @@ $(document).on('click', '.prec', function() {
       giorno = getCurrentM.add(1, 'd').format(`D dddd`);
       dataDay = getCurrentM.format(`YYYY-MM-DD`);
   }
-  ajaxCall(ajaxMonth);
-});
+}
+
+
 
 
 
