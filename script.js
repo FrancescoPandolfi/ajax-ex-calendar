@@ -53,6 +53,7 @@ $(document).on('click', '.prec', function() {
   ajaxCall(ajaxMonth);
 });
 
+
 function printDays(getCurrentM) {
   var daysIn = get2018month.daysInMonth();
   var giorno = getCurrentM.format(`D dddd`);
@@ -93,7 +94,7 @@ var dataDay = getGen2018.format(`YYYY-MM-DD`);
       var context = {'giorno' : giorno, 'day' : dataDay};
       var html = template(context);
       $('.mese').append(html)
-      giorno = getGen2018.add(1, 'days').format(`D dddd`);
+      giorno = getGen2018.add(1, 'd').format(`D dddd`);
       dataDay = getGen2018.format(`YYYY-MM-DD`)
   }
 
@@ -124,13 +125,10 @@ function ajaxCall(ajaxMonth) {
           currentLiAttr.addClass('festa');
         }
       });
-
     });
-
   },
   error: function (richiesta, stato, errore) {
     alert("E' avvenuto un errore. " + errore);
   }
   });
-
 }
